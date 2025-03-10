@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun English Learning</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3 {
+            color: #4682b4;
+            text-align: center;
+        }
+        
+        .lesson-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .exercise {
+            background-color: #e6f7ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .character {
+            display: inline-block;
+            width: 150px;
+            margin: 10px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        .character img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f8f8f8;
+            border: 3px solid #4682b4;
+        }
+        
+        .character-face {
+            width: 80px;
+            height: 100px;
+            margin: 0 auto;
+            position: relative;
+            background-color: #ffe0bd;
+            border-radius: 50%;
+        }
+        
+        .button {
+            background-color: #4682b4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 5px;
+        }
+        
+        .button:hover {
+            background-color: #3a6d99;
+        }
+        
+        .feedback {
+            font-weight: bold;
+            color: #4682b4;
+            height: 20px;
+        }
+        
+        .hide {
+            display: none;
+        }
+        
+        .draggable {
+            cursor: move;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin: 5px;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        
+        .droppable {
+            min-height: 30px;
+            border: 2px dashed #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+        
+        .highlight {
+            background-color: #ffffcc;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .pet-card {
+            display: inline-block;
+            width: 130px;
+            border: 2px solid #4682b4;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .pet-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+            background-color: #f0f0f0;
+        }
+        
+        .emotion-card {
+            display: inline-block;
+            width: 100px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+        }
+        
+        .score-display {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #4682b4;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: #4CAF50;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+        
+        /* Animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animated {
+            animation: bounce 1s infinite;
+        }
+        
+        .star {
+            color: gold;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fun English Adventure! <span class="emoji">🌟</span></h1>
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar">0%</div>
+        </div>
+        <div class="score-display">Score: <span id="totalScore">0</span> points</div>
+    </header>
+    
+    <div class="lesson-section">
+        <h2>Lesson 1: Describing People <span class="emoji">👨‍👩‍👧‍👦</span></h2>
+        
+        <p>Hello friends! Today we will learn how to describe people. We can describe:</p>
+        <ul>
+            <li>Hair color (black, brown, blonde, red)</li>
+            <li>Eye color (blue, green, brown, black)</li>
+            <li>Face features (freckles, glasses, beard)</li>
+            <li>Clothes (hat, hoodie, t-shirt)</li>
+        </ul>
+        
+        <div class="exercise">
+            <h3>Exercise 1: Meet Our Friends</h3>
+            <div class="character">
+                <div class="character-face" id="olivia-face">
+                    <!-- Face features will be added by JavaScript -->
+                </div>
+                <p><strong>Olivia</strong></p>
+                <p>She has <span class="highlight">wavy brown hair</span> and <span class="highlight">olive skin</span>. She is wearing a <span class="highlight">pink sweater</span>.</p>
+            </div>
+            
+            <div class="character">
+                <div class="character-face" id="neil-face"></div>
+                <p><strong>Neil</strong></p>
+                <p>He has <span class="highlight">glasses</span> and <span class="highlight">short hair</span>.</p>
+            </div>
+            
+            <div class="character">
+                <div class="character-face" id="lorna-face"></div>
+                <p><strong>Lorna</strong></p>
+                <p>She has <span class="highlight">freckles</span> and is wearing a <span class="highlight">cap</span>.</p>
+            </div>
+            
+            <div class="character">
+                <div class="character-face" id="greta-face"></div>
+                <p><strong>Greta</strong></p>
+                <p>She has <span class="highlight">blue eyes</span> and <span class="highlight">red hair</span>.</p>
+            </div>
+            
+            <h4>Now, let's practice! Match the description with the right person:</h4>
+            <div id="matching-exercise">
+                <p>1. This person has red hair: <select id="q1">
+                    <option value="">Choose...</option>
+                    <option value="olivia">Olivia</option>
+                    <option value="neil">Neil</option>
+                    <option value="lorna">Lorna</option>
+                    <option value="greta">Greta</option>
+                </select></p>
+                
+                <p>2. This person has glasses: <select id="q2">
+                    <option value="">Choose...</option>
+                    <option value="olivia">Olivia</option>
+                    <option value="neil">Neil</option>
+                    <option value="lorna">Lorna</option>
+                    <option value="greta">Greta</option>
+                </select></p>
+                
+                <p>3. This person has freckles: <select id="q3">
+                    <option value="">Choose...</option>
+                    <option value="olivia">Olivia</option>
+                    <option value="neil">Neil</option>
+                    <option value="lorna">Lorna</option>
+                    <option value="greta">Greta</option>
+                </select></p>
+                
+                <button class="button" onclick="checkMatching()">Check Answers</button>
+                <p class="feedback" id="matching-feedback"></p>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h3>Exercise 2: I've got...</h3>
+            <p>In English, we use "I've got" to talk about what we have.</p>
+            <p>Examples:</p>
+            <ul>
+                <li>I've got <span class="highlight">brown hair</span> and <span class="highlight">brown eyes</span>.</li>
+                <li>I've got <span class="highlight">a green notebook</span>.</li>
+                <li>She's got <span class="highlight">black hair</span>.</li>
+                <li>He's got <span class="highlight">blue eyes</span>.</li>
+            </ul>
+            
+            <h4>Fill in the blanks with the correct form:</h4>
+            <div id="got-exercise">
+                <p>1. I __________ a red pencil case.</p>
+                <select id="got1">
+                    <option value="">Choose...</option>
+                    <option value="have">have</option>
+                    <option value="has">has</option>
+                    <option value="ive got">I've got</option>
+                </select>
+                
+                <p>2. She __________ blonde hair.</p>
+                <select id="got2">
+                    <option value="">Choose...</option>
+                    <option value="have">have</option>
+                    <option value="has">has</option>
+                    <option value="shes got">She's got</option>
+                </select>
+                
+                <p>3. They __________ brown eyes.</p>
+                <select id="got3">
+                    <option value="">Choose...</option>
+                    <option value="have">have</option>
+                    <option value="has">has</option>
+                    <option value="theyve got">They've got</option>
+                </select>
+                
+                <button class="button" onclick="checkGot()">Check Answers</button>
+                <p class="feedback" id="got-feedback"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lesson-section">
+        <h2>Lesson 2: Feelings and Emotions <span class="emoji">😊</span></h2>
+        
+        <p>We can talk about how people feel using these words:</p>
+        
+        <div class="emotion-card" onclick="speakWord('happy')">
+            <div class="emoji">😄</div>
+            <p>Happy</p>
+        </div>
+        
+        <div class="emotion-card" onclick="speakWord('sad')">
+            <div class="emoji">😢</div>
+            <p>Sad</p>
+        </div>
+        
+        <div class="emotion-card" onclick="speakWord('angry')">
+            <div class="emoji">😠</div>
+            <p>Angry</p>
+        </div>
+        
+        <div class="emotion-card" onclick="speakWord('tired')">
+            <div class="emoji">😴</div>
+            <p>Tired</p>
+        </div>
+        
+        <div class="emotion-card" onclick="speakWord('scared')">
+            <div class="emoji">😨</div>
+            <p>Scared</p>
+        </div>
+        
+        <div class="emotion-card" onclick="speakWord('bored')">
+            <div class="emoji">😒</div>
+            <p>Bored</p>
+        </div>
+        
+        <div class="exercise">
+            <h3>Exercise 3: How Do They Feel?</h3>
+            <p>Look at the pictures and select the correct emotion:</p>
+            
+            <div id="emotions-exercise">
+                <div style="margin-bottom: 15px;">
+                    <div class="emoji" style="font-size: 2em;">😄</div>
+                    <p>This person feels: 
+                    <select id="emotion1">
+                        <option value="">Choose...</option>
+                        <option value="happy">Happy</option>
+                        <option value="sad">Sad</option>
+                        <option value="angry">Angry</option>
+                        <option value="tired">Tired</option>
+                    </select>
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <div class="emoji" style="font-size: 2em;">😠</div>
+                    <p>This person feels: 
+                    <select id="emotion2">
+                        <option value="">Choose...</option>
+                        <option value="happy">Happy</option>
+                        <option value="sad">Sad</option>
+                        <option value="angry">Angry</option>
+                        <option value="tired">Tired</option>
+                    </select>
+                    </p>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <div class="emoji" style="font-size: 2em;">😴</div>
+                    <p>This person feels: 
+                    <select id="emotion3">
+                        <option value="">Choose...</option>
+                        <option value="happy">Happy</option>
+                        <option value="sad">Sad</option>
+                        <option value="angry">Angry</option>
+                        <option value="tired">Tired</option>
+                    </select>
+                    </p>
+                </div>
+                
+                <button class="button" onclick="checkEmotions()">Check Answers</button>
+                <p class="feedback" id="emotions-feedback"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lesson-section">
+        <h2>Lesson 3: At Home and School <span class="emoji">🏠</span><span class="emoji">🏫</span></h2>
+        
+        <p>Let's learn about rooms in the house and school items:</p>
+        
+        <div style="text-align: center;">
+            <div style="display: inline-block; width: 45%; vertical-align: top;">
+                <h3>Home Rooms</h3>
+                <ul style="text-align: left;">
+                    <li>Kitchen</li>
+                    <li>Bedroom</li>
+                    <li>Bathroom</li>
+                    <li>Living room</li>
+                    <li>Garden</li>
+                </ul>
+            </div>
+            
+            <div style="display: inline-block; width: 45%; vertical-align: top;">
+                <h3>School Items</h3>
+                <ul style="text-align: left;">
+                    <li>Pencil case</li>
+                    <li>Notebook</li>
+                    <li>Schoolbag</li>
+                    <li>Chair</li>
+                    <li>Book</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h3>Exercise 4: Where Are They?</h3>
+            <p>We use different prepositions to say where things are:</p>
+            <ul>
+                <li><span class="highlight">In</span> the kitchen</li>
+                <li><span class="highlight">At</span> school</li>
+                <li><span class="highlight">Under</span> the table</li>
+                <li><span class="highlight">On</span> the chair</li>
+            </ul>
+            
+            <h4>Choose the correct preposition:</h4>
+            <div id="prepositions-exercise">
+                <p>1. The cat is __________ the garden.</p>
+                <select id="prep1">
+                    <option value="">Choose...</option>
+                    <option value="in">in</option>
+                    <option value="at">at</option>
+                    <option value="under">under</option>
+                    <option value="on">on</option>
+                </select>
+                
+                <p>2. The book is __________ the table.</p>
+                <select id="prep2">
+                    <option value="">Choose...</option>
+                    <option value="in">in</option>
+                    <option value="at">at</option>
+                    <option value="under">under</option>
+                    <option value="on">on</option>
+                </select>
+                
+                <p>3. The children are __________ school.</p>
+                <select id="prep3">
+                    <option value="">Choose...</option>
+                    <option value="in">in</option>
+                    <option value="at">at</option>
+                    <option value="under">under</option>
+                    <option value="on">on</option>
+                </select>
+                
+                <button class="button" onclick="checkPrepositions()">Check Answers</button>
+                <p class="feedback" id="prepositions-feedback"></p>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h3>Exercise 5: Colors and Items</h3>
+            <p>Let's practice describing items with colors:</p>
+            
+            <div id="colors-exercise">
+                <p>Unscramble these sentences:</p>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>1. white - The - chair - is</p>
+                    <div class="droppable" id="sentence1"></div>
+                    <div>
+                        <span class="draggable" draggable="true" data-word="The">The</span>
+                        <span class="draggable" draggable="true" data-word="chair">chair</span>
+                        <span class="draggable" draggable="true" data-word="is">is</span>
+                        <span class="draggable" draggable="true" data-word="white">white</span>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>2. notebook - I've - a - green - got</p>
+                    <div class="droppable" id="sentence2"></div>
+                    <div>
+                        <span class="draggable" draggable="true" data-word="I've">I've</span>
+                        <span class="draggable" draggable="true" data-word="got">got</span>
+                        <span class="draggable" draggable="true" data-word="a">a</span>
+                        <span class="draggable" draggable="true" data-word="green">green</span>
+                        <span class="draggable" draggable="true" data-word="notebook">notebook</span>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>3. brown - This - a - schoolbag - is</p>
+                    <div class="droppable" id="sentence3"></div>
+                    <div>
+                        <span class="draggable" draggable="true" data-word="This">This</span>
+                        <span class="draggable" draggable="true" data-word="is">is</span>
+                        <span class="draggable" draggable="true" data-word="a">a</span>
+                        <span class="draggable" draggable="true" data-word="brown">brown</span>
+                        <span class="draggable" draggable="true" data-word="schoolbag">schoolbag</span>
+                    </div>
+                </div>
+                
+                <button class="button" onclick="checkSentences()">Check Answers</button>
+                <p class="feedback" id="sentences-feedback"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lesson-section">
+        <h2>Lesson 4: Animals and Pets <span class="emoji">🐱</span><span class="emoji">🐶</span></h2>
+        
+        <div class="pet-card" onclick="speakWord('dog')">
+            <div class="pet-img">🐶</div>
+            <p><strong>Dog</strong></p>
+        </div>
+        
+        <div class="pet-card" onclick="speakWord('cat')">
+            <div class="pet-img">🐱</div>
+            <p><strong>Cat</strong></p>
+        </div>
+        
+        <div class="pet-card" onclick="speakWord('rabbit')">
+            <div class="pet-img">🐰</div>
+            <p><strong>Rabbit</strong></p>
+        </div>
+        
+        <div class="pet-card" onclick="speakWord('turtle')">
+            <div class="pet-img">🐢</div>
+            <p><strong>Turtle</strong></p>
+        </div>
+        
+        <div class="exercise">
+            <h3>Exercise 6: Animal Words</h3>
+            <p>Unscramble these animal words:</p>
+            
+            <div id="animals-exercise">
+                <div style="margin-bottom: 15px;">
+                    <p>1. g - o - d</p>
+                    <input type="text" id="animal1" placeholder="Type your answer">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>2. t - a - c</p>
+                    <input type="text" id="animal2" placeholder="Type your answer">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>3. b - b - i - t - a - r</p>
+                    <input type="text" id="animal3" placeholder="Type your answer">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <p>4. t - l - e - r - u - t</p>
+                    <input type="text" id="animal4" placeholder="Type your answer">
+                </div>
+                
+                <button class="button" onclick="checkAnimals()">Check Answers</button>
+                <p class="feedback" id="animals-feedback"></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lesson-section">
+        <h2>Final Test: Describing My Best Friend <span class="emoji">👫</span></h2>
+        
+        <div class="exercise">
+            <h3>Exercise 7: Write about your best friend</h3>
+            <p>Use these words to help you:</p>
+            <ul>
+                <li>Appearance: beautiful/handsome, short/tall, fat/thin</li>
+                <li>Character: clever, helpful, friendly, funny</li>
+                <li>Hair & Eyes: black, blue, red, brown</li>
+                <li>Clothes: jeans, dress, t-shirt, shoes</li>
+            </ul>
+            
+            <div id="friend-exercise">
+                <p>Start with: <strong>"My best friend is..."</strong></p>
+                <textarea id="friend-description" rows="8" cols="50" placeholder="Write about your best friend here..."></textarea>
+                
+                <p>Check if you included:</p>
+                <div>
+                    <input type="checkbox" id="check1"> <label for="check1">Name</label><br>
+                    <input type="checkbox" id="check2"> <label for="check2">Hair color</label><br>
+                    <input type="checkbox" id="check3"> <label for="check3">Eye color</label><br>
+                    <input type="checkbox" id="check4"> <label for="check4">Clothes</label><br>
+                    <input type="checkbox" id="check5"> <label for="check5">Character (how they are)</label><br>
+                </div>
+                
+                <button class="button" onclick="submitFriendDescription()">Submit Description</button>
+                <p class="feedback" id="friend-feedback"></p>
+            </div>
+        </div>
+        
+        <div id="final-score" class="hide">
+            <h2>Congratulations! <span class="emoji">🎉</span></h2>
+            <p>You've completed all the exercises!</p>
+            <div class="score-display">Your final score: <span id="finalScoreDisplay">0</span> / 100</div>
+            <div id="stars-container" style="text-align: center;"></div>
+            <p style="text-align: center;">You're ready for your exam! <span class="emoji">👍</span></p>
+            <button class="button" onclick="location.reload()">Start Again</button>
+        </div>
+    </div>
+    
+    <script>
+        // Global score tracking
+        let totalScore = 0;
+        let exercisesCompleted = 0;
+        const totalExercises = 7;
+        
+        // Initialize drag and drop
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup drag and drop functionality
+            const draggables = document.querySelectorAll('.draggable');
+            const dropZones = document.querySelectorAll('.droppable');
+            
+            draggables.forEach(draggable => {
+                draggable.addEventListener('dragstart', function(e) {
+                    this.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', this.dataset.word);
+                });
+                
+                draggable.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                });
+            });
+            
+            dropZones.forEach(dropZone => {
+                dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    this.style.backgroundColor = '#e8f4ff';
+                });
+                
+                dropZone.addEventListener('dragleave', function() {
+                    this.style.backgroundColor = '';
+                });
+                
+                dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.style.backgroundColor = '';
+                    const data = e.dataTransfer.getData('text/plain');
+                    const span = document.createElement('span');
+                    span.textContent = data + ' ';
+                    span.classList.add('dropped-word');
+                    this.appendChild(span);
+                });
+            });
+        });
+        
+        // Text-to-speech function
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(word);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+            exercisesCompleted++;
+            const progressPercentage = Math.floor((exercisesCompleted / totalExercises) * 100);
+            document.getElementById('progressBar').style.width = progressPercentage + '%';
+            document.getElementById('progressBar').textContent = progressPercentage + '%';
+            
+            // Show final score if all exercises are completed
+            if (exercisesCompleted >= totalExercises) {
+                document.getElementById('final-score').classList.remove('hide');
+                document.getElementById('finalScoreDisplay').textContent = totalScore;
+                
+                // Add stars based on score
+                const starsContainer = document.getElementById('stars-container');
+                starsContainer.innerHTML = '';
+                const numStars = Math.floor(totalScore / 20); // 1 star per 20 points
+                for (let i = 0; i < numStars; i++) {
+                    const star = document.createElement('span');
+                    star.textContent = '⭐';
+                    star.classList.add('star');
+                    starsContainer.appendChild(star);
+                }
+            }
+        }
+        
+        // Update total score
+        function updateScore(points) {
+            totalScore += points;
+            document.getElementById('totalScore').textContent = totalScore;
+        }
+        
+        // Exercise 1: Check matching
+        function checkMatching() {
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            
+            let score = 0;
+            let feedback = '';
+            
+            if (q1 === 'greta') score += 5;
+            if (q2 === 'neil') score += 5;
+            if (q3 === 'lorna') score += 5;
+            
+            if (score === 15) {
+                feedback = 'Excellent! All answers are correct! 🌟';
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 3 correct. Try again!`;
+            }
+            
+            document.getElementById('matching-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 2: Check "I've got" forms
+        function checkGot() {
+            const got1 = document.getElementById('got1').value;
+            const got2 = document.getElementById('got2').value;
+            const got3 = document.getElementById('got3').value;
+            
+            let score = 0;
+            let feedback = '';
+            
+            if (got1 === 'ive got') score += 5;
+            if (got2 === 'shes got') score += 5;
+            if (got3 === 'theyve got') score += 5;
+            
+            if (score === 15) {
+                feedback = "Great job! You know how to use 'have got'! 🌟";
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 3 correct. Try again!`;
+            }
+            
+            document.getElementById('got-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 3: Check emotions
+        function checkEmotions() {
+            const emotion1 = document.getElementById('emotion1').value;
+            const emotion2 = document.getElementById('emotion2').value;
+            const emotion3 = document.getElementById('emotion3').value;
+            
+            let score = 0;
+            let feedback = '';
+            
+            if (emotion1 === 'happy') score += 5;
+            if (emotion2 === 'angry') score += 5;
+            if (emotion3 === 'tired') score += 5;
+            
+            if (score === 15) {
+                feedback = "Fantastic! You know your emotions! 🌟";
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 3 correct. Try again!`;
+            }
+            
+            document.getElementById('emotions-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 4: Check prepositions
+        function checkPrepositions() {
+            const prep1 = document.getElementById('prep1').value;
+            const prep2 = document.getElementById('prep2').value;
+            const prep3 = document.getElementById('prep3').value;
+            
+            let score = 0;
+            let feedback = '';
+            
+            if (prep1 === 'in') score += 5;
+            if (prep2 === 'on') score += 5;
+            if (prep3 === 'at') score += 5;
+            
+            if (score === 15) {
+                feedback = "Great job! You know your prepositions! 🌟";
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 3 correct. Try again!`;
+            }
+            
+            document.getElementById('prepositions-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 5: Check sentences
+        function checkSentences() {
+            // Get the text from each droppable area
+            const sentence1 = document.getElementById('sentence1').textContent.trim();
+            const sentence2 = document.getElementById('sentence2').textContent.trim();
+            const sentence3 = document.getElementById('sentence3').textContent.trim();
+            
+            let score = 0;
+            let feedback = '';
+            
+            // Check if sentences are correct (allowing for extra spaces)
+            if (sentence1.replace(/\s+/g, ' ') === 'The chair is white') score += 5;
+            if (sentence2.replace(/\s+/g, ' ') === 'I\'ve got a green notebook') score += 5;
+            if (sentence3.replace(/\s+/g, ' ') === 'This is a brown schoolbag') score += 5;
+            
+            if (score === 15) {
+                feedback = "Excellent! You can make great sentences! 🌟";
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 3 correct. Try again!`;
+            }
+            
+            document.getElementById('sentences-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 6: Check animals
+        function checkAnimals() {
+            const animal1 = document.getElementById('animal1').value.toLowerCase().trim();
+            const animal2 = document.getElementById('animal2').value.toLowerCase().trim();
+            const animal3 = document.getElementById('animal3').value.toLowerCase().trim();
+            const animal4 = document.getElementById('animal4').value.toLowerCase().trim();
+            
+            let score = 0;
+            let feedback = '';
+            
+            if (animal1 === 'dog') score += 5;
+            if (animal2 === 'cat') score += 5;
+            if (animal3 === 'rabbit') score += 5;
+            if (animal4 === 'turtle') score += 5;
+            
+            if (score === 20) {
+                feedback = "Amazing! You know all the animal words! 🌟";
+                updateProgress();
+            } else {
+                feedback = `You got ${score/5} out of 4 correct. Try again!`;
+            }
+            
+            document.getElementById('animals-feedback').textContent = feedback;
+            updateScore(score);
+        }
+        
+        // Exercise 7: Submit friend description
+        function submitFriendDescription() {
+            const description = document.getElementById('friend-description').value;
+            const check1 = document.getElementById('check1').checked;
+            const check2 = document.getElementById('check2').checked;
+            const check3 = document.getElementById('check3').checked;
+            const check4 = document.getElementById('check4').checked;
+            const check5 = document.getElementById('check5').checked;
+            
+            let score = 0;
+            let feedback = '';
+            
+            // Check if description is long enough
+            if (description.length > 30) score += 5;
+            
+            // Add points for each checked item
+            if (check1) score += 3;
+            if (check2) score += 3;
+            if (check3) score += 3;
+            if (check4) score += 3;
+            if (check5) score += 3;
+            
+            if (score >= 15) {
+                feedback = "Wonderful description of your friend! 🌟";
+                updateProgress();
+            } else {
+                feedback = "Try to add more details to your description!";
+            }
+            
+            document.getElementById('friend-feedback').textContent = feedback;
+            updateScore(score);
+        }
+    </script>
+</body>
+</html>
